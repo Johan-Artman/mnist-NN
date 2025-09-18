@@ -1,0 +1,6 @@
+numpy
+Pillow
+torch
+keras
+tensorflow
+matplotlib
