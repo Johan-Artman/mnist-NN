@@ -59,6 +59,7 @@ def paint(event):
 def clear_canvas():
     canvas.delete("all")
     draw.rectangle([0, 0, CANVAS_WIDTH, CANVAS_HEIGHT], fill='white')
+    prediction_label.config(text="Draw a digit and click Predict")
 
 
 def predict_digit():
@@ -72,11 +73,24 @@ def predict_digit():
     probabilities = tf.nn.softmax(prediction).numpy()[0]  # type: ignore
     digit = np.argmax(probabilities)
     confidence = probabilities[digit] * 100
+    
+    # Update the prediction display
+    prediction_text = f"Predicted Digit: {digit}\nConfidence: {confidence:.1f}%"
+    prediction_label.config(text=prediction_text)
+    
     print(f"Predicted digit: {digit} (confidence: {confidence:.2f}%)")
     print(f"All probabilities: {[f'{i}: {prob*100:.1f}%' for i, prob in enumerate(probabilities)]}")
 
 # Bind mouse drag event to the paint function
 canvas.bind("<B1-Motion>", paint)
+
+# Create prediction display box
+prediction_frame = tk.Frame(root, relief="sunken", borderwidth=2)
+prediction_frame.pack(pady=10)
+
+prediction_label = tk.Label(prediction_frame, text="Draw a digit and click Predict", 
+                           font=("Arial", 16), width=30, height=2)
+prediction_label.pack(padx=10, pady=10)
 
 # Create buttons to clear the canvas and trigger prediction
 button_frame = tk.Frame(root)
