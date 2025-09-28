@@ -49,7 +49,7 @@ draw = ImageDraw.Draw(image1)
 
 
 def paint(event):
-    brush_size = 4
+    brush_size = 15
     x1, y1 = (event.x - brush_size), (event.y - brush_size)
     x2, y2 = (event.x + brush_size), (event.y + brush_size)
 

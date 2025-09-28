@@ -4,3 +4,4 @@ torch
 keras
 tensorflow
 matplotlib
+Juypyter
